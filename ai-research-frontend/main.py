@@ -7,6 +7,7 @@ from langchain.agents import create_tool_calling_agent, AgentExecutor
 from tools import search_tool, wiki_tool, save_tool
 import os
 
+
 load_dotenv()
 
 class ResearchResponse(BaseModel):
@@ -18,7 +19,7 @@ class ResearchResponse(BaseModel):
 # ✅ Use Together's DeepSeek model
 llm = ChatOpenAI(
     openai_api_base="https://api.together.xyz/v1",
-    openai_api_key=os.getenv("TOGETHER_API_KEY"),
+    openai_api_key=os.getenv("VITE_TOGETHER_API_KEY"),
     model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free"
 )
 

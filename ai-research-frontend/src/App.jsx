@@ -1,6 +1,22 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import './index.css';
+
+
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
+
+
+// ... inside your component
+function createMarkup(text) {
+  // Strip unwanted <think> tags
+  const cleanText = text.replace(/<\/?think>/g, '');
+  // Convert Markdown to HTML, sanitize it
+  const html = marked(cleanText);
+  return { __html: DOMPurify.sanitize(html) };
+}
+
 
 function App() {
   const [prompt, setPrompt] = useState('');
@@ -47,7 +63,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Ask DeepSeek Anything</h1>
+      <h1>Ask Agent anything</h1>
       <input
         type="text"
         value={prompt}
@@ -61,21 +77,21 @@ function App() {
       </button>
      
 
-      <div style={{
-  marginTop: '20px',
-  padding: '16px',
-  borderRadius: '8px',
-  border: '1px solid #ccc',
-  backgroundColor: '#1e1e1e',
-  color: 'white',
-  whiteSpace: 'pre-wrap',
-  fontFamily: 'monospace',
-  maxWidth: '80%',
-  marginLeft: 'auto',
-  marginRight: 'auto'
-}}>
-  {responseText}
-</div>
+                    <div
+                style={{
+                  backgroundColor: '#1e1e1e',
+                  color: 'white',
+                  padding: '16px',
+                  borderRadius: '10px',
+                  border: '1px solid #333',
+                  maxWidth: '80%',
+                  margin: '20px auto',
+                  fontFamily: 'sans-serif',
+                  lineHeight: 1.6,
+                }}  //for ugly fonts and weird hashs 
+                dangerouslySetInnerHTML={createMarkup(responseText)}
+              ></div>
+
 
     </div>
   );
