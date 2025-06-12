@@ -63,7 +63,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Ask Agent anything</h1>
+      <h1>Ask Agent anything 💜💙🩵</h1>
       <input
         type="text"
         value={prompt}
